@@ -43,8 +43,6 @@ To run the app, choose if you want to run android or ios app. Note that iOS apps
     npm run ios
     ```
 
-`````
-
 - **Android**:
 
   - Can be run on both Mac and Windows devices.

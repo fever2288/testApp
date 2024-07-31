@@ -1,50 +1,76 @@
-# Welcome to your Expo app 👋
+## Table of Contents
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the App](#running-the-app)
+- [Running Tests](#running-tests)
+- [Troubleshooting](#troubleshooting)
 
-## Get started
+## Prerequisites
 
-1. Install dependencies
+Before you begin, ensure you have met the following requirements:
 
-   ```bash
+- **Node.js**: Download and install [Node.js](https://nodejs.org/).
+- **Expo CLI**: Install Expo CLI globally by running:
+  ```sh
+  npm install -g expo-cli
+  ```
+
+## Installation
+
+To install the project, follow these steps:
+
+1. Clone this repository:
+
+2. Install the dependencies:
+   ```sh
    npm install
    ```
 
-2. Start the app
+## Running the App
 
-   ```bash
-    npx expo start
-   ```
+Before running the app make sure to run server first. There is env.ts file in utils folder of this project where PORT and IP adress must be set in fields for live (just for demonstration) and DEV enviorment. The PORT number is PORT of the server which you can find in index file of server project. Getting IP adress depending on system that is running the project. On WINDOWS in terminal run command ipconfig. IP address will be listed. Usually, it will say IPv4 Address and follow the prefix 192.168.1.# or 192.168.0.#. On MAC the fastest way to find this information is by opening the Apple menu, and then heading to System Preferences > Network. Select your network connection, and then click “Advanced.” IP address information is on the “TCP/IP” tab. When you have all information combine it and set it as localHost
 
-In the output, you'll find options to open the app in a
+To run the app, choose if you want to run android or ios app. Note that iOS apps can only be run on Mac devices, while Android apps can be run on both Mac and Windows devices.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **iOS**:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+  - Requires a Mac device.
+  - Download Xcode [Xcode](https://developer.apple.com/xcode/)
+  - Start the simulator
+  - From the root of the project run
+    ```sh
+    npm run ios
+    ```
 
-## Get a fresh project
+`````
 
-When you're ready, run:
+- **Android**:
 
-```bash
-npm run reset-project
-```
+  - Can be run on both Mac and Windows devices.
+  - Download [Android Studio](https://developer.android.com/studio)
+  - Create simulator and start it
+  - From the root of the project run
+    ```sh
+    npm run android
+    ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+## Running tests
 
-To learn more about developing your project with Expo, look at the following resources:
+To run test, run the following command
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+````sh
+  npm run test
+  ```
 
-## Join the community
+## Troubleshooting
 
-Join our community of developers creating universal apps.
+If you encounter any issues, try the following steps:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Ensure all dependencies are installed correctly by running `npm install` again.
+- Make sure you have the latest version of Expo CLI by running:
+```sh
+npm install -g expo-cli
+````
+`````

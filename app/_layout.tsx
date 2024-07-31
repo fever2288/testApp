@@ -1,37 +1,52 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
+import React from 'react';
 import { useEffect } from 'react';
-import 'react-native-reanimated';
+import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font';
+import { ThemeProvider } from 'styled-components/native';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+import useTheme from '../infrastructure/theme';
+import HomeStackNavigator from '../infrastructure/navigation/side.navigator';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import InternetStatusChecker from '../components/internet-status-checker/internet-status-checker.component';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+const Index = () => {
+  const [fontsLoaded, fontsError] = useFonts({
+    'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
+    'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+    'SF-Pro-Display-Semibold': require('../assets/fonts/SF-Pro-Display-Semibold.otf'),
+    'SF-Pro-Text-Regular': require('../assets/fonts/SF-Pro-Text-Regular.otf'),
+    'SF-Pro-Text-Semibold': require('../assets/fonts/SF-Pro-Text-Semibold.otf'),
   });
 
+  const theme = useTheme();
+
   useEffect(() => {
-    if (loaded) {
+    if (fontsLoaded || fontsError) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
 
-  if (!loaded) {
+    /**  const hideNavigationBar = async () => {
+      await NavigationBar.setVisibilityAsync('hidden');
+    };
+
+    hideNavigationBar();**/
+  }, [fontsLoaded, fontsError]);
+
+  if (!fontsLoaded && !fontsError) {
+    // Render nothing and keep splash screen while fonts are loading
     return null;
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Provider store={store}>
+      <InternetStatusChecker>
+        <ThemeProvider theme={theme}>
+          <HomeStackNavigator />
+        </ThemeProvider>
+      </InternetStatusChecker>
+    </Provider>
   );
-}
+};
+
+export default Index;
